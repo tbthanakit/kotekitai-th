@@ -1,18 +1,26 @@
-import { useEffect } from 'react'
-import { db } from './api/firebase'
+import { Routes, Route, Link } from 'react-router-dom'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Dashboard from './pages/Dashboard'
 
 function App() {
-  useEffect(() => {
-    // ลองให้มันพ่นค่า Database ออกมาดูว่าเชื่อมต่อสำเร็จไหม
-    console.log("Firebase DB Initialized:", db)
-  }, [])
-
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-4xl font-bold text-blue-600 mb-4">
-        Kotekitai System 🚀
-      </h1>
-      <p className="text-gray-600">ตรวจสอบ Console (F12) เพื่อดูสถานะ Firebase</p>
+    <div className="min-h-screen bg-gray-100">
+      {/* แถบเมนูจำลอง (เดี๋ยวเราค่อยซ่อนทีหลัง เอาไว้กดเทสต์ก่อน) */}
+      <nav className="bg-indigo-600 p-4 text-white flex justify-center gap-6 shadow-md">
+        <Link to="/" className="hover:text-indigo-200 font-medium">หน้า Login</Link>
+        <Link to="/register" className="hover:text-indigo-200 font-medium">หน้า Register</Link>
+        <Link to="/dashboard" className="hover:text-indigo-200 font-medium">หน้า Dashboard</Link>
+      </nav>
+
+      {/* พื้นที่สำหรับแสดงหน้าเว็บตาม URL */}
+      <div className="p-4">
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </div>
     </div>
   )
 }
