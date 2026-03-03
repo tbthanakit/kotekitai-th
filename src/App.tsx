@@ -1,3 +1,4 @@
+import ImportData from './pages/ImportData'
 import { Routes, Route, Link } from 'react-router-dom'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/import" element={<ImportData />} />
         </Routes>
       </div>
     </div>
