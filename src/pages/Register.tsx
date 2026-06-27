@@ -38,15 +38,13 @@ export default function Register() {
   const fetchEligibleLeaders = async () => {
     try {
       const membersRef = collection(db, 'members')
-      // ดึงเฉพาะคนที่ยังว่าง (ยังไม่ได้ผูกบัญชี)
-      const q = query(membersRef, where('linked_uid', '==', null))
-      const querySnapshot = await getDocs(q)
+      const querySnapshot = await getDocs(membersRef)
 
       const availableLeaders: Member[] = []
       querySnapshot.forEach((doc) => {
         const data = doc.data()
-        // กรองเฉพาะระดับผู้นำ (คุณสามารถเพิ่ม/ลด คำในวงเล็บนี้ได้ตาม Master Data เลยครับ)
-        if (['หัวหน้าวง', 'ผู้รับผิดชอบ'].includes(data.core_role)) {
+        const isUnlinked = !data.linked_uid
+        if (isUnlinked && ['หัวหน้าวง', 'ผู้รับผิดชอบ'].includes(data.core_role)) {
           availableLeaders.push({
             id: doc.id,
             first_name: data.first_name,
