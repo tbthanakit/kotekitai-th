@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { auth, db } from '../api/firebase'
 import { onAuthStateChanged, type User } from 'firebase/auth'
-import { collection, query, where, getDocs, doc, updateDoc } from 'firebase/firestore'
+import { collection, getDocs, doc, updateDoc } from 'firebase/firestore'
 
 // สร้าง Type เพื่อให้ TypeScript ช่วยเช็คความถูกต้อง
 interface Member {
